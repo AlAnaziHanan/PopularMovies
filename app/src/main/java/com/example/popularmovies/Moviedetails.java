@@ -1,7 +1,6 @@
 package com.example.popularmovies;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,24 +25,28 @@ public class Moviedetails extends AppCompatActivity {
     TextView plot;
     @BindView ( R.id.titleIv )
     TextView title;
-    @BindView ( R.id.imageIv )
+   @BindView ( R.id.imageIV )
     ImageView poster;
     @BindView ( R.id.voteIv )
     TextView vote;
     @BindView ( R.id.dateIv )
     TextView release_date;
-
+   // @BindViews({ R.id.titleIv,R.id.voteIv,R.id.imageIv, R.id.dateIv,R.id.plotIv })
+    //List<RetroPhoto> list;
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.detail);
-        ButterKnife.bind ( this );
-        Intent intent = getIntent ();
-        RetroPhoto mIntent = (RetroPhoto) intent.getSerializableExtra ( "detail" );
 
+        Intent intent = getIntent ();
+        Movie mIntent = (Movie) intent.getSerializableExtra ( "detail" );
+       // ActionBar actionBar= getSupportActionBar ();
+       // actionBar.hide ();
+
+        ButterKnife.bind ( this );
         this.plot=  findViewById ( R.id.plotIv );
         this.title=  findViewById ( R.id.titleIv );
-        this.poster= findViewById ( R.id.imageIv );
+        this.poster= findViewById ( R.id.imageIV );
         this.release_date=  findViewById ( R.id.dateIv );
         this.vote=  findViewById ( R.id.voteIv );
 
@@ -56,12 +59,12 @@ public class Moviedetails extends AppCompatActivity {
         return true;
     }
     @SuppressLint("StringFormatInvalid")
-    public void display( RetroPhoto m){
+    public void display( Movie m){
         // Picasso.with(this).load(m.getPoster ()).into(poster);
         Picasso.get()
                 .load( String.valueOf ( poster ) )
                 .placeholder(R.mipmap.ic_launcher)
-                .into((ImageView) findViewById ( R.id.imageIv ));
+                .into((ImageView) findViewById ( R.id.imageIV ));
         title.setText ( m.getTitle () );
         vote.setText ( m.getVote_average () );
         plot.setText ( m.getOverview () );

@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 
 public interface GetDataService {
     @GET("/photos")
-    Call<List<RetroPhoto>> getAllPhotos();
+    Call<List<Movie>> getAllPhotos();
 }
 

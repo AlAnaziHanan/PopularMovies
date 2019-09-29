@@ -2,7 +2,7 @@ package com.example.popularmovies;
 
 import com.google.gson.annotations.SerializedName;
 
-class RetroPhoto {
+class Movie {
 
     @SerializedName( "title" )
     private String title;
@@ -15,7 +15,7 @@ class RetroPhoto {
     @SerializedName ( "overview" )
     private String overview;
 
-    public RetroPhoto ( String title , String vote_average , String posterPath , String date , String overview ) {
+    public Movie ( String title , String vote_average , String posterPath , String date , String overview ) {
         this.title = title;
         this.vote_average = vote_average;
         this.posterPath = posterPath;
@@ -23,7 +23,7 @@ class RetroPhoto {
         this.overview = overview;
     }
 
-    public RetroPhoto () {
+    public Movie () {
 
     }
 
