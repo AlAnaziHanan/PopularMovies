@@ -22,21 +22,22 @@ public class MainActivity extends  AppCompatActivity  {
     private GridViewAdapter adapter;
     private GridView mGridView;
     ProgressBar progressBar;
+    //Place key
+    private List<Movie> popularList;
+    private List<Movie> topRatedList;
+    public static final String BASE_URL = "https://api.themoviedb.org/v5/";
+  //public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
+    //public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=/";//+key;;
 
     private void populateGV (List<Movie> movie){
 
         mGridView =findViewById ( R.id.moviesGrid );
-        adapter=new GridViewAdapter ( this, movie.size (), movie);
+        adapter=new GridViewAdapter ( this,R.layout.activity_gridview , movie);
         mGridView.setAdapter ( adapter );
 
     }
 
-    //Place key
-    private List<Movie> popularList;
-    private List<Movie> topRatedList;
-    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/550?api_key=";
-    public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=";//+key;;
-    public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=";//+key;;
+
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );

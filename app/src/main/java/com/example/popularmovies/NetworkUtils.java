@@ -29,9 +29,9 @@ import java.util.ArrayList;
 
 public class NetworkUtils extends AppCompatActivity {
     private static final String TAG = NetworkUtils.class.getSimpleName ();
-    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/550?api_key=";
-    public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=";//+key;;
-    public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=";//+key;;
+    public static final String BASE_URL = "https://api.themoviedb.org/v5/";
+   // public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
+    //public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=/";//+key;;
     private GridView mGridView;
     private ProgressBar progressBar;
     private GridViewAdapter mGridAdapter;
@@ -72,7 +72,6 @@ public class NetworkUtils extends AppCompatActivity {
                 //return stringBuffer.toString ();
             } catch (IOException e) {
                 e.printStackTrace ();
-                return  null;
             }
             return m;
         }

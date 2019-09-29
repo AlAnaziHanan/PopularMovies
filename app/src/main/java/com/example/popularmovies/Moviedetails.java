@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Moviedetails extends AppCompatActivity {
-    public static  final String MOVIE_POSTER_BASE_URL="https://image.tmdb.org/t/p/w185";
+    public static  final String MOVIE_POSTER_BASE_URL="https://image.tmdb.org/v5/";
     private static final String TAG = Moviedetails.class.getSimpleName();
 
     @BindView( R.id.plotIv )
