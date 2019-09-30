@@ -25,7 +25,7 @@ public class MainActivity extends  AppCompatActivity  {
     //Place key
     private List<Movie> popularList;
     private List<Movie> topRatedList;
-    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/550?api_key=a1929f608371156c06e3be63aca37892";//a1929f608371156c06e3be63aca37892
+    public static final String BASE_URL = "https://api.themoviedb.org/v5/";//a1929f608371156c06e3be63aca37892
     //public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
     //public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=/";//+key;;
 
