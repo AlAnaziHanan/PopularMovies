@@ -25,24 +25,15 @@ public class MainActivity extends  AppCompatActivity  {
     //Place key
     private List<Movie> popularList;
     private List<Movie> topRatedList;
-    public static final String BASE_URL = "https://api.themoviedb.org/v5/";
-  //public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
+    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/550?api_key=a1929f608371156c06e3be63aca37892";//a1929f608371156c06e3be63aca37892
+    //public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
     //public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=/";//+key;;
-
-    private void populateGV (List<Movie> movie){
-
-        mGridView =findViewById ( R.id.moviesGrid );
-        adapter=new GridViewAdapter ( this,R.layout.activity_gridview , movie);
-        mGridView.setAdapter ( adapter );
-
-    }
 
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_main );
-
 
         final ProgressBar progressBar=findViewById ( R.id.bar );
         progressBar.setIndeterminate ( true );
@@ -54,23 +45,41 @@ public class MainActivity extends  AppCompatActivity  {
         Call<List<Movie>> call = dataService.getAllPhotos ();
 
         call.enqueue ( new Callback<List<Movie>> () {
+            private Call<List<Movie>> call;
+            private Response<List<Movie>> response;
+
             @Override
             public void onResponse ( Call<List<Movie>> call , Response<List<Movie>> response ) {
+                this.call = call;
+                this.response = response;
                 progressBar.setVisibility ( View.GONE );
-                populateGV(response.body ());
-
-                mGridView.setOnItemLongClickListener ( new AdapterView.OnItemLongClickListener () {
-                    @Override
-                    public boolean onItemLongClick ( AdapterView<?> adapterView , View view , int i , long l ) {
-                        Intent intent = new Intent ( MainActivity.this, Moviedetails.class );
-                        intent.putExtra ( "my_recycler_view", popularList.indexOf ( i ) );
-                        startActivity ( intent );
-                        return false;
+                if (response != null) {
+                    if (response != null) {
+                        mGridView = findViewById ( R.id.moviesGrid );
+                        adapter = new GridViewAdapter ( MainActivity.this , R.layout.activity_gridview , response.body () );
+                        mGridView.setAdapter ( adapter );
                     }
+                    // populateGV ( response.body () );
+                }
+                    mGridView.setOnClickListener ( new AdapterView.OnClickListener () {
+                        @Override
+                        public void onClick ( View view ) {
+                            Intent intent = new Intent ( MainActivity.this , Moviedetails.class );
+                            intent.putExtra ( "my_recycler_view" , popularList.indexOf (this ) );
+                            startActivity ( intent );
+                        }
 
-                } );
+                       /* @Override
+                        public boolean onItemLongClick ( AdapterView<?> adapterView , View view , int i , long l ) {
+                            Intent intent = new Intent ( MainActivity.this , Moviedetails.class );
+                            intent.putExtra ( "my_recycler_view" , popularList.indexOf ( i ) );
+                            startActivity ( intent );
+                            return false;
+                        }*/
 
-            }
+                    } );
+
+                }
 
             @Override
             public void onFailure ( Call<List<Movie>> call , Throwable throwable ) {
@@ -87,6 +96,15 @@ public class MainActivity extends  AppCompatActivity  {
 
         mGridView.setAdapter( (ListAdapter) adapter );
     }*/
+    }
+    /**
+     * @param movie
+     */
+    private void populateGV (List<Movie> movie){
+        if(movie !=null) {
+            mGridView =findViewById ( R.id.moviesGrid );
+            adapter=new GridViewAdapter ( this,R.layout.activity_gridview , movie);
+            mGridView.setAdapter ( adapter );}
     }
 
 }

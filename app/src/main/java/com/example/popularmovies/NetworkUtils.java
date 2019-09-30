@@ -29,8 +29,8 @@ import java.util.ArrayList;
 
 public class NetworkUtils extends AppCompatActivity {
     private static final String TAG = NetworkUtils.class.getSimpleName ();
-    public static final String BASE_URL = "https://api.themoviedb.org/v5/";
-   // public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
+    //public static final String BASE_URL = "http://api.themoviedb.org/3/discover/movie/";
+    // public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
     //public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=/";//+key;;
     private GridView mGridView;
     private ProgressBar progressBar;
@@ -56,11 +56,11 @@ public class NetworkUtils extends AppCompatActivity {
 
         @Override
         protected ArrayList<Movie> doInBackground ( Void... voids ) {
-            URLConnection urlConnection=null;
-            BufferedReader bufferedReader=null;
+            URLConnection urlConnection;
+            BufferedReader bufferedReader;
             ArrayList<Movie> m = new ArrayList<> ();
             try {
-                URL movieURL=new URL(BASE_URL);
+                URL movieURL=new URL(MainActivity.BASE_URL);
                 urlConnection=movieURL.openConnection ();
                 bufferedReader =new BufferedReader ( new InputStreamReader ( urlConnection.getInputStream () ) );
                 StringBuffer stringBuffer= new StringBuffer (  );
@@ -93,7 +93,7 @@ public class NetworkUtils extends AppCompatActivity {
         GridView gv;
         String result="";
         try {
-            URL movieURL=new URL(BASE_URL);
+            URL movieURL=new URL(MainActivity.BASE_URL);
             urlConnection=movieURL.openConnection ();
             bufferedReader =new BufferedReader ( new InputStreamReader ( urlConnection.getInputStream () ) );
             StringBuffer stringBuffer= new StringBuffer (  );
@@ -112,6 +112,7 @@ public class NetworkUtils extends AppCompatActivity {
     //check connectivity
     public static Boolean status ( Context context ) {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService ( Context.CONNECTIVITY_SERVICE );
+        assert manager != null;
         NetworkInfo netInfo = manager.getActiveNetworkInfo ();
         return netInfo != null && netInfo.isConnected ();
     }
@@ -120,6 +121,7 @@ public class NetworkUtils extends AppCompatActivity {
             JSONObject obj = new JSONObject ( data );
             JSONArray array = obj.optJSONArray ( "results" );
             Movie item;
+            assert array != null;
             for (int i = 0; i < array.length (); i++) {
                 JSONObject json = array.getJSONObject ( i );
                 String title=json.optString ( "title" );
@@ -149,9 +151,9 @@ public class NetworkUtils extends AppCompatActivity {
 
 
 
-               //add movie to m ArrayList
+                //add movie to m ArrayList
                 mGridData.add (item);
-               // mGridView.add ( item );
+                // mGridView.add ( item );
             }
         } catch (JSONException e) {
             e.printStackTrace ();

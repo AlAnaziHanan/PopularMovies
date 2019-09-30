@@ -24,6 +24,13 @@
                 android:value=".MainActivity"/>
 
         </activity>
+        <activity android:name=".NetworkUtils"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/app_name">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+
+        </activity>
     </application>
 
 </manifest>

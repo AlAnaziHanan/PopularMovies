@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,13 +26,13 @@ public class Moviedetails extends AppCompatActivity {
     TextView plot;
     @BindView ( R.id.titleIv )
     TextView title;
-   @BindView ( R.id.imageIV )
+    @BindView ( R.id.imageIV )
     ImageView poster;
     @BindView ( R.id.voteIv )
     TextView vote;
     @BindView ( R.id.dateIv )
     TextView release_date;
-   // @BindViews({ R.id.titleIv,R.id.voteIv,R.id.imageIv, R.id.dateIv,R.id.plotIv })
+    // @BindViews({ R.id.titleIv,R.id.voteIv,R.id.imageIv, R.id.dateIv,R.id.plotIv })
     //List<RetroPhoto> list;
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -40,8 +41,8 @@ public class Moviedetails extends AppCompatActivity {
 
         Intent intent = getIntent ();
         Movie mIntent = (Movie) intent.getSerializableExtra ( "detail" );
-       // ActionBar actionBar= getSupportActionBar ();
-       // actionBar.hide ();
+        // ActionBar actionBar= getSupportActionBar ();
+        // actionBar.hide ();
 
         ButterKnife.bind ( this );
         this.plot=  findViewById ( R.id.plotIv );
@@ -51,6 +52,7 @@ public class Moviedetails extends AppCompatActivity {
         this.vote=  findViewById ( R.id.voteIv );
 
         poster.setImageResource ( intent.getIntExtra ( "image",0 ) );
+        assert mIntent != null;
         display ( mIntent );
     }
     @Override
@@ -73,7 +75,7 @@ public class Moviedetails extends AppCompatActivity {
         SimpleDateFormat dateInput = new SimpleDateFormat ( "yyyy-MM-dd" );
         String date;
         try {
-            date = dateFormat.format ( dateInput.parse ( m.getDate ()) );
+            date = dateFormat.format ( Objects.requireNonNull ( dateInput.parse ( m.getDate () ) ) );
         } catch (ParseException e) {
             e.printStackTrace ();
             date = m.getDate ();
