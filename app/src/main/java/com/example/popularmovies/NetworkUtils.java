@@ -29,24 +29,21 @@ import java.util.ArrayList;
 
 public class NetworkUtils extends AppCompatActivity {
     private static final String TAG = NetworkUtils.class.getSimpleName ();
-    //public static final String BASE_URL = "http://api.themoviedb.org/3/discover/movie/";
-    // public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
-    //public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=/";//+key;;
-    private GridView mGridView;
-    private ProgressBar progressBar;
-    private GridViewAdapter mGridAdapter;
     private ArrayList<Movie> mGridData;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gridview);
-        mGridView = findViewById(R.id.moviesGrid);
-        progressBar = findViewById(R.id.bar);
+        //public static final String BASE_URL = "http://api.themoviedb.org/3/discover/movie/";
+        // public static final String POPURL="http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=/";//+key;;
+        //public static final String RATEURL="http://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key=/";//+key;;
+        GridView mGridView = findViewById ( R.id.moviesGrid );
+        ProgressBar progressBar = findViewById ( R.id.bar );
         //Initialize
         mGridData = new ArrayList<>();
-        mGridAdapter = new GridViewAdapter(this, R.layout.model, mGridData);
-        mGridView.setAdapter(mGridAdapter);
+        GridViewAdapter mGridAdapter = new GridViewAdapter ( this , R.layout.model , mGridData );
+        mGridView.setAdapter( mGridAdapter );
         //Start download
         new Json().execute ();
         progressBar.setVisibility( View.VISIBLE);
@@ -63,7 +60,7 @@ public class NetworkUtils extends AppCompatActivity {
                 URL movieURL=new URL(MainActivity.BASE_URL);
                 urlConnection=movieURL.openConnection ();
                 bufferedReader =new BufferedReader ( new InputStreamReader ( urlConnection.getInputStream () ) );
-                StringBuffer stringBuffer= new StringBuffer (  );
+                StringBuilder stringBuffer= new StringBuilder (  );
 
                 String line;
                 while((line=bufferedReader.readLine ())!=null){
@@ -96,7 +93,7 @@ public class NetworkUtils extends AppCompatActivity {
             URL movieURL=new URL(MainActivity.BASE_URL);
             urlConnection=movieURL.openConnection ();
             bufferedReader =new BufferedReader ( new InputStreamReader ( urlConnection.getInputStream () ) );
-            StringBuffer stringBuffer= new StringBuffer (  );
+            StringBuilder stringBuffer= new StringBuilder (  );
 
             String line;
             while((line=bufferedReader.readLine ())!=null){
@@ -105,7 +102,7 @@ public class NetworkUtils extends AppCompatActivity {
             //  return stringBuffer.toString ();
         } catch (IOException e) {
             e.printStackTrace ();
-            return  null;
+
         }
         return result;
     }

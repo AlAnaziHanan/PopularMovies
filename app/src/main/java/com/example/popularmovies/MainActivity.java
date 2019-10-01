@@ -97,9 +97,7 @@ public class MainActivity extends  AppCompatActivity  {
         mGridView.setAdapter( (ListAdapter) adapter );
     }*/
     }
-    /**
-     * @param movie
-     */
+
     private void populateGV (List<Movie> movie){
         if(movie !=null) {
             mGridView =findViewById ( R.id.moviesGrid );

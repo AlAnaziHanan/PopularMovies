@@ -1,5 +1,6 @@
 package com.example.popularmovies;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,15 +14,13 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridViewAdapter extends ArrayAdapter<Movie> {
+class GridViewAdapter extends ArrayAdapter<Movie> {
 
     private List<Movie> mGridData ;
-    private int layoutResource;
     private Context context;
 
     public GridViewAdapter ( Context context , int resource , List<Movie> mGridData ) {
         super ( context , resource , mGridData );
-        this.layoutResource = resource;
         this.context = context;
         this.mGridData = mGridData;
     }
@@ -29,8 +28,11 @@ public class GridViewAdapter extends ArrayAdapter<Movie> {
     public long getItemId ( int i ) {
         return i;
     }
+
+
     @Override
-    public View getView ( int i , View view , ViewGroup viewGroup ) {
+    public View getView ( int i , View view ,  ViewGroup viewGroup ) {
+
         View row = view;
         ViewHolder holder;
         if (row == null) {
