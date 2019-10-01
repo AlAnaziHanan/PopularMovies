@@ -53,19 +53,19 @@ public class MainActivity extends  AppCompatActivity  {
                 this.call = call;
                 this.response = response;
                 progressBar.setVisibility ( View.GONE );
-                if (response != null) {
-                    if (response != null) {
-                        mGridView = findViewById ( R.id.moviesGrid );
-                        adapter = new GridViewAdapter ( MainActivity.this , R.layout.activity_gridview , response.body () );
-                        mGridView.setAdapter ( adapter );
-                    }
+
+                if (response.body () != null) {
+                    mGridView = findViewById ( R.id.moviesGrid );
+                    adapter = new GridViewAdapter ( MainActivity.this , R.layout.activity_gridview , response.body () );
+                    mGridView.setAdapter ( adapter );
+
                     // populateGV ( response.body () );
-                }
+
                     mGridView.setOnClickListener ( new AdapterView.OnClickListener () {
                         @Override
                         public void onClick ( View view ) {
                             Intent intent = new Intent ( MainActivity.this , Moviedetails.class );
-                            intent.putExtra ( "my_recycler_view" , popularList.indexOf (this ) );
+                            intent.putExtra ( "my_recycler_view" , popularList.indexOf ( this ) );
                             startActivity ( intent );
                         }
 
@@ -78,8 +78,8 @@ public class MainActivity extends  AppCompatActivity  {
                         }*/
 
                     } );
-
                 }
+            }
 
             @Override
             public void onFailure ( Call<List<Movie>> call , Throwable throwable ) {
